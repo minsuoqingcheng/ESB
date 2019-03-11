@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: real-time-push
+
+---
+server:
+  port: 10000
