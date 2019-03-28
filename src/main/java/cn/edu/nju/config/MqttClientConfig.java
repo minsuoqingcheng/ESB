@@ -1,7 +1,7 @@
 package cn.edu.nju.config;
 
+import cn.edu.nju.service.ApplicationWebSocket;
 import cn.edu.nju.service.CollectDataStoreService;
-import cn.edu.nju.service.WebSocketTemplate;
 import com.alibaba.fastjson.JSONObject;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -36,8 +36,7 @@ public class MqttClientConfig {
 
     @Autowired
     private CollectDataStoreService storeService;
-    @Autowired
-    private WebSocketTemplate webSocketTemplate;
+
 
     private static final Executor executor = Executors.newFixedThreadPool(4);
 
@@ -67,7 +66,7 @@ public class MqttClientConfig {
                     String data = new String(message.getPayload());
                     JSONObject jsonObject = JSONObject.parseObject(data);
                     executor.execute(() -> {
-                        webSocketTemplate.sendMessage(jsonObject);
+                        ApplicationWebSocket.sendInfo(jsonObject.toJSONString());
                         storeService.store(jsonObject);
                     });
                 }

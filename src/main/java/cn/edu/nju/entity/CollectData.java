@@ -1,9 +1,10 @@
 package cn.edu.nju.entity;
 
+
 public class CollectData {
 
     private int type;
-    private int data;
+    private double data;
     private long time;
 
     public int getType() {
@@ -14,11 +15,11 @@ public class CollectData {
         this.type = type;
     }
 
-    public int getData() {
+    public double getData() {
         return data;
     }
 
-    public void setData(int data) {
+    public void setData(double data) {
         this.data = data;
     }
 
